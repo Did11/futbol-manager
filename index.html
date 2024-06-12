@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Team Manager</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <h1>Football Team Manager</h1>
+    <div class="form-container">
+        <h2>Agregar Jugador</h2>
+        <form id="addPlayerForm">
+            <input type="text" id="name" placeholder="Nombre" required>
+            <input type="number" id="age" placeholder="Edad" required>
+            <select id="position">
+                <option value="delantero">Delantero</option>
+                <option value="centrocampista">Centrocampista</option>
+                <option value="defensa">Defensa</option>
+                <option value="arquero">Arquero</option>
+            </select>
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+    <div class="lists-container">
+        <div>
+            <h2>Lista de Titulares</h2>
+            <ul id="starterList"></ul>
+        </div>
+        <div>
+            <h2>Lista de Suplentes</h2>
+            <ul id="substituteList"></ul>
+        </div>
+    </div>
+    <div class="operations-container">
+        <div class="operation">
+            <h2>Cambiar Posición</h2>
+            <form id="changePositionForm">
+                <input type="number" id="playerId" placeholder="ID del Jugador" required>
+                <select id="newPosition">
+                    <option value="delantero">Delantero</option>
+                    <option value="centrocampista">Centrocampista</option>
+                    <option value="defensa">Defensa</option>
+                    <option value="arquero">Arquero</option>
+                </select>
+                <button type="submit">Cambiar Posición</button>
+            </form>
+        </div>
+        <div class="operation">
+            <h2>Realizar Cambio</h2>
+            <form id="substituteForm">
+                <input type="number" id="playerOutId" placeholder="ID del Jugador que Sale" required>
+                <input type="number" id="playerInId" placeholder="ID del Jugador que Entra" required>
+                <button type="submit">Realizar Cambio</button>
+            </form>
+        </div>
+    </div>
+    <script src="src/app.js"></script>
+</body>
+</html>
