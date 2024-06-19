@@ -142,10 +142,10 @@ document.getElementById('changePositionForm').addEventListener('submit', async (
 
     try {
         await changePlayerPosition(id, newPosition);
-        showMessage('Posición cambiada'); // Mostrar mensaje de éxito
+        showMessage('Posición cambiada'); 
         loadPlayers();
     } catch (error) {
-        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
+        showMessage('Error: ' + error.message, true); 
     }
 });
 
@@ -158,10 +158,10 @@ document.getElementById('substituteForm').addEventListener('submit', async (even
 
     try {
         await substitutePlayer(idOut, idIn);
-        showMessage('Cambio realizado'); // Mostrar mensaje de éxito
+        showMessage('Cambio realizado');
         loadPlayers();
     } catch (error) {
-        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
+        showMessage('Error: ' + error.message, true); 
     }
 });
 
@@ -184,7 +184,7 @@ const loadPlayers = async () => {
             }
         });
     } catch (error) {
-        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
+        showMessage('Error: ' + error.message, true);
     }
 };
 
