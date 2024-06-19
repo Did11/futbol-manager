@@ -1,6 +1,57 @@
-const positions = ['delantero', 'centrocampista', 'defensa', 'arquero'];
+let positions = [];
 let players = [];
 
+// Cargar posiciones desde un objeto embebido y agregar opciones a los selectores
+const loadPositions = () => {
+    const positionsData = {
+        "positions": [
+            {"code": "ARQ", "name": "Arquero"},
+            {"code": "LI", "name": "Lateral Izquierdo"},
+            {"code": "LD", "name": "Lateral Derecho"},
+            {"code": "DFC", "name": "Defensor Central"},
+            {"code": "VDI", "name": "Volante Defensivo Izquierdo"},
+            {"code": "VDD", "name": "Volante Defensivo Derecho"},
+            {"code": "VDC", "name": "Volante Defensivo Central"},
+            {"code": "VI", "name": "Volante Izquierdo"},
+            {"code": "VD", "name": "Volante Derecho"},
+            {"code": "VC", "name": "Volante Central"},
+            {"code": "VOI", "name": "Volante Ofensivo Izquierdo"},
+            {"code": "VOD", "name": "Volante Ofensivo Derecho"},
+            {"code": "VOC", "name": "Volante Ofensivo Central"},
+            {"code": "DI", "name": "Delantero Izquierdo"},
+            {"code": "DD", "name": "Delantero Derecho"},
+            {"code": "DC", "name": "Delantero Centro"}
+        ]
+    };
+
+    positions = positionsData.positions.map(pos => pos.code);
+
+    const positionSelect = document.getElementById('position');
+    const newPositionSelect = document.getElementById('newPosition');
+
+    positionsData.positions.forEach(position => {
+        const option = document.createElement('option');
+        option.value = position.code;
+        option.textContent = position.name;
+        positionSelect.appendChild(option);
+        newPositionSelect.appendChild(option.cloneNode(true)); // Clonar para evitar errores de referencia
+    });
+};
+
+// Guardar jugadores en localStorage
+const savePlayersToLocalStorage = () => {
+    localStorage.setItem('players', JSON.stringify(players));
+};
+
+// Cargar jugadores desde localStorage
+const loadPlayersFromLocalStorage = () => {
+    const storedPlayers = localStorage.getItem('players');
+    if (storedPlayers) {
+        players = JSON.parse(storedPlayers);
+    }
+};
+
+// Agregar un nuevo jugador a la lista y guardarlo en localStorage
 const addPlayer = async (name, age, position) => {
     if (!positions.includes(position)) {
         throw new Error('Posición inválida');
@@ -15,13 +66,16 @@ const addPlayer = async (name, age, position) => {
     };
 
     players.push(newPlayer);
+    savePlayersToLocalStorage(); // Guardar en localStorage después de agregar
     return newPlayer;
 };
 
+// Listar todos los jugadores
 const listPlayers = async () => {
     return players;
 };
 
+// Cambiar la posición de un jugador y guardarlo en localStorage
 const changePlayerPosition = async (id, newPosition) => {
     if (!positions.includes(newPosition)) {
         throw new Error('Posición inválida');
@@ -34,8 +88,10 @@ const changePlayerPosition = async (id, newPosition) => {
     }
 
     players[playerIndex].position = newPosition;
+    savePlayersToLocalStorage(); 
 };
 
+// Sustituir un jugador y guardar los cambios en localStorage
 const substitutePlayer = async (idOut, idIn) => {
     const playerOutIndex = players.findIndex(p => p.id === idOut);
     const playerInIndex = players.findIndex(p => p.id === idIn);
@@ -48,9 +104,12 @@ const substitutePlayer = async (idOut, idIn) => {
         throw new Error('Cambio inválido');
     }
 
+    // Intercambiar los estados de los jugadores
     [players[playerOutIndex].status, players[playerInIndex].status] = [players[playerInIndex].status, players[playerOutIndex].status];
+    savePlayersToLocalStorage(); 
 };
 
+// Manejar el envío del formulario para agregar un nuevo jugador
 document.getElementById('addPlayerForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -67,6 +126,7 @@ document.getElementById('addPlayerForm').addEventListener('submit', async (event
     }
 });
 
+// Manejar el envío del formulario para cambiar la posición de un jugador
 document.getElementById('changePositionForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -82,6 +142,7 @@ document.getElementById('changePositionForm').addEventListener('submit', async (
     }
 });
 
+// Manejar el envío del formulario para sustituir un jugador
 document.getElementById('substituteForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -97,6 +158,7 @@ document.getElementById('substituteForm').addEventListener('submit', async (even
     }
 });
 
+// Cargar los jugadores y mostrarlos en las listas
 const loadPlayers = async () => {
     try {
         const players = await listPlayers();
@@ -107,7 +169,7 @@ const loadPlayers = async () => {
 
         players.forEach(player => {
             const listItem = document.createElement('li');
-            listItem.textContent = `ID: ${player.id}, ${player.name}, ${player.age} años, ${player.position}, ${player.status}`;
+            listItem.textContent = `ID: ${player.id}, ${player.name}, ${player.age} años, ${player.position}`;
             if (player.status === 'titular') {
                 starterList.appendChild(listItem);
             } else {
@@ -119,4 +181,9 @@ const loadPlayers = async () => {
     }
 };
 
-window.onload = loadPlayers;
+// Cargar posiciones y jugadores desde localStorage cuando la página se carga
+window.onload = () => {
+    loadPositions();
+    loadPlayersFromLocalStorage();
+    loadPlayers();
+};
