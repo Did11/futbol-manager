@@ -1,7 +1,5 @@
 # Challenge-Promises
-Ejercicio: Gestión de equipo de fútbol.
-
-Desarrolla una aplicación para gestionar un equipo de fútbol, que permita realizar operaciones como agregar jugadores, listar jugadores, asignar posiciones y realizar cambios durante un partido. Utiliza promesas, async/await, try/catch y composición de funciones asíncronas para manejar las operaciones de forma segura y eficiente.
+Ejercicio: Gestión de equipo de fútbol. Desarrolla una aplicación para gestionar un equipo de fútbol, que permita realizar operaciones como agregar jugadores, listar jugadores, asignar posiciones y realizar cambios durante un partido. Utiliza promesas, async/await, try/catch y composición de funciones asíncronas para manejar las operaciones de forma segura y eficiente.
 
 # Requisitos
 1) La aplicación debe permitir agregar nuevos jugadores al equipo proporcionando su nombre, edad y posición.
