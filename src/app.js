@@ -1,7 +1,14 @@
 let positions = [];
 let players = [];
 
-// Cargar posiciones desde un objeto embebido y agregar opciones a los selectores
+// Mostrar mensaje en la interfaz
+const showMessage = (message, isError = false) => {
+    const messageDiv = document.getElementById('message');
+    messageDiv.textContent = message;
+    messageDiv.style.color = isError ? 'red' : 'white';
+};
+
+// Cargar posiciones desde un objeto embebido y agregar opciones a los selectores de posición
 const loadPositions = () => {
     const positionsData = {
         "positions": [
@@ -119,10 +126,10 @@ document.getElementById('addPlayerForm').addEventListener('submit', async (event
 
     try {
         const player = await addPlayer(name, age, position);
-        console.log('Jugador agregado:', player);
+        showMessage('Jugador agregado: ' + player.name); // Mostrar mensaje de éxito
         loadPlayers();
     } catch (error) {
-        console.error('Error:', error.message);
+        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
     }
 });
 
@@ -135,10 +142,10 @@ document.getElementById('changePositionForm').addEventListener('submit', async (
 
     try {
         await changePlayerPosition(id, newPosition);
-        console.log('Posición cambiada');
+        showMessage('Posición cambiada'); // Mostrar mensaje de éxito
         loadPlayers();
     } catch (error) {
-        console.error('Error:', error.message);
+        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
     }
 });
 
@@ -151,10 +158,10 @@ document.getElementById('substituteForm').addEventListener('submit', async (even
 
     try {
         await substitutePlayer(idOut, idIn);
-        console.log('Cambio realizado');
+        showMessage('Cambio realizado'); // Mostrar mensaje de éxito
         loadPlayers();
     } catch (error) {
-        console.error('Error:', error.message);
+        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
     }
 });
 
@@ -177,7 +184,7 @@ const loadPlayers = async () => {
             }
         });
     } catch (error) {
-        console.error('Error:', error.message);
+        showMessage('Error: ' + error.message, true); // Mostrar mensaje de error
     }
 };
 

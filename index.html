@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Team Manager</title>
+    <title>Fútbol Team Manager 2024</title>
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-    <h1>Football Team Manager</h1>
+    <h1>Fulbol Team Manager 2024: Chiqui Tapia Edition</h1>
     <div class="form-container">
-        <h2>Agregar Jugador</h2>
+        <h2>Agregar jugador</h2>
         <form id="addPlayerForm">
             <input type="text" id="name" placeholder="Nombre" required>
             <input type="number" id="age" placeholder="Edad" required>
             <select id="position">
-                <!-- Las opciones serán añadidas dinámicamente -->
+                <!-- Las opciones se añaden dinámicamente -->
             </select>
             <button type="submit">Agregar</button>
         </form>
     </div>
+    <div id="message"></div> <!-- Acá se mostrarán los mensajes -->
     <div class="lists-container">
         <div>
             <h2>Lista de Titulares</h2>
@@ -31,20 +32,20 @@
     </div>
     <div class="operations-container">
         <div class="operation">
-            <h2>Cambiar Posición</h2>
+            <h2>Modificar Posición</h2>
             <form id="changePositionForm">
-                <input type="number" id="playerId" placeholder="ID del Jugador" required>
+                <input type="number" id="playerId" placeholder="ID del jugador" required>
                 <select id="newPosition">
-                    <!-- Las opciones serán añadidas dinámicamente -->
+                    <!-- Las opciones se añaden dinámicamente -->
                 </select>
-                <button type="submit">Cambiar Posición</button>
+                <button type="submit">Modificar Posición</button>
             </form>
         </div>
         <div class="operation">
             <h2>Realizar Cambio</h2>
             <form id="substituteForm">
-                <input type="number" id="playerOutId" placeholder="ID del Jugador que Sale" required>
-                <input type="number" id="playerInId" placeholder="ID del Jugador que Entra" required>
+                <input type="number" id="playerOutId" placeholder="ID del jugador que Sale" required>
+                <input type="number" id="playerInId" placeholder="ID del jugador que Entra" required>
                 <button type="submit">Realizar Cambio</button>
             </form>
         </div>
